@@ -10,33 +10,43 @@ int photodiodePinIR = A2; //IR photodiode
 
 int buttonState = 0; //set initial button pressed state to false
 
+int photodiodeRedValue = 0; //initialize the red photodiode sensor value
+int photodiodeIRValue = 0; //initialize the IR photodiode sensor value
+
+const int redAmpFactor = 100;
+const int IRAmpFactor = 100;
+
 void startMeasurement(){
   //red LED light
   digitalWrite(redPin, HIGH);
-  delay(1000);
-  digitalWrite(redPin, LOW);
-  delay(1000);
 
   //read voltage for red photodiode
   photodiodeRedValue = analogRead(photodiodePinRed);
-  float voltagePhotodiodeRed = photodiodeRedValue * (3.3 / 1023); // 3.3 V / 1023 analog units
-  Serial.println("Red Voltage: " + voltagePhotodiodeRed);
+  float voltagePhotodiodeRed = photodiodeRedValue * (3.3 / 1023) * redAmpFactor; // 3.3 V / 1023 analog units
+  Serial.print("Red Voltage: ");
+  Serial.println(voltagePhotodiodeRed);
+
+  delay(1000);
+  digitalWrite(redPin, LOW);
+  delay(1000);
   
   //IRLED light
   digitalWrite(IRPin, HIGH);
-  delay (1000);
-  digitalWrite(IRPin, LOW);
-  delay (1000);
 
   //read voltage for IR photodiode
   photodiodeIRValue = analogRead(photodiodePinIR);
-  float voltagePhotodiodeIR = photodiodeIRValue * (3.3 / 1023); // 3.3 V / 1023 analog units
-  Serial.println("IR Votage: " + voltagePhotodiodeIR);
+  float voltagePhotodiodeIR = photodiodeIRValue * (3.3 / 1023) * IRAmpFactor; // 3.3 V / 1023 analog units
+  Serial.print("IR Votage: ");
+  Serial.println(photodiodeIRValue);
+
+  delay (3000);
+  digitalWrite(IRPin, LOW);
+  delay (1000);
 }
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin();
+  Serial.begin(9600);
 
   //initialize LEDs
   pinMode(redPin, OUTPUT);
