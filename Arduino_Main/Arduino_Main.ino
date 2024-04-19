@@ -37,7 +37,7 @@ void startMeasurement(){
   photodiodeIRValue = analogRead(photodiodePinIR);
   float voltagePhotodiodeIR = photodiodeIRValue * (3.3 / 1023) * IRAmpFactor; // 3.3 V / 1023 analog units
   Serial.print("IR Votage: ");
-  Serial.println(photodiodeIRValue);
+  Serial.println(voltagePhotodiodeIR);
 
   delay (3000);
   digitalWrite(IRPin, LOW);
