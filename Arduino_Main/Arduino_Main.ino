@@ -19,6 +19,7 @@ const int IRAmpFactor = 100;
 void startMeasurement(){
   //red LED light
   digitalWrite(redPin, HIGH);
+  delay(3000);
 
   //read voltage for red photodiode
   photodiodeRedValue = analogRead(photodiodePinRed);
@@ -26,12 +27,12 @@ void startMeasurement(){
   Serial.print("Red Voltage: ");
   Serial.println(voltagePhotodiodeRed);
 
-  delay(1000);
   digitalWrite(redPin, LOW);
   delay(1000);
   
   //IRLED light
   digitalWrite(IRPin, HIGH);
+  delay (3000);
 
   //read voltage for IR photodiode
   photodiodeIRValue = analogRead(photodiodePinIR);
@@ -39,7 +40,6 @@ void startMeasurement(){
   Serial.print("IR Votage: ");
   Serial.println(voltagePhotodiodeIR);
 
-  delay (3000);
   digitalWrite(IRPin, LOW);
   delay (1000);
 }
