@@ -16,6 +16,9 @@ int photodiodeIRValue = 0; //initialize the IR photodiode sensor value
 const int redAmpFactor = 100;
 const int IRAmpFactor = 100;
 
+float red_ir_ratio = 0;
+float pH = 0;
+
 void startMeasurement(){
   //red LED light
   digitalWrite(redPin, HIGH);
@@ -42,6 +45,12 @@ void startMeasurement(){
 
   digitalWrite(IRPin, LOW);
   delay (1000);
+
+  // calculate the pH based on the ratio
+  red_ir_ratio = voltagePhotodiodeRed / voltagePhotodiodeIR;
+  pH = 51.4 * exp(-2.04 * red_ir_ratio);
+  Serial.print("Ph: ");
+  Serial.println(pH);
 }
 
 void setup() {
